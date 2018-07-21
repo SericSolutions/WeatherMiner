@@ -1,0 +1,21 @@
+{
+  "name": "weatherminer",
+  "version": "1.0.0",
+  "description": "Weather minning bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:SericSolutions/WeatherMiner.git"
+  },
+  "author": "Asad",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cron": "^1.3.0",
+    "firebase-admin": "^5.12.1"
+  },
+  "devDependencies": {}
+}

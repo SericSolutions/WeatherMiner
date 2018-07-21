@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "weatherminer",
+  "private_key_id": "8396dbd33126c70807ac7c0b41a3df8ed4952edf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDDj1S+WOGdPX+u\nT35B6ZrmYfu9Q9Vr5VHSITnPZaJdhWOMe63binT+cr6J5GjsMuAO3SL8pnwjkUmT\nvS6Rox8B47BDOCG0QJPwsUoOx6oSXyGRtqF2lSXsabuNaSRJ/HHqRxpaBPYNyY80\n234oj+1ngcA/aLoHUzhYOVhWjAxu+jKJ1BzmMMEzFHzwni68DH1WsrpcoTjHtaeY\nlV5KB5o5MjdgmHPxQosVUUQr82oHzxqiXzQAZzZqhiZz19AtsD+Jkg4Hw0ajftIK\nQtfPDO71yk7l9WejyJqFeeqDR8rISKh03yRdYpawIIg26xcRvJ1S3ZhBDuqWi5/s\nS5Yfer65AgMBAAECggEAGG7kg3cUZ90YAkh7+bKSVWghl+yNPOf6YzrJKnCZgCjF\nyXa8appvx/NrJfcBOvLs9pPKJsSK7GC0eikf/oyMYmPhu7bxfcAMcSfyx5+fpUr4\nepMAX7ypGn1oCaDSKredPfb4mQ2soQgGr0Ugi+Mrogveiq2Zgd0ebuYUnj+XisKE\n5mo0y/HCQYiog1nh2lbWEQHW9vtNKUblIvIQbQ+jO5j8orggVo+XgZLLb2A6y58N\nRHa4Pwo5YDOUX80CzWxnIUlf+3PohZwyj/gFjYIduH+KCi/GRSsvuM3y035y7NfJ\nDTZ0YzVed7AiqZUWCe5E5f8wYFvCTlU9Kjy2Ww8f7wKBgQDgAutQJ6THKNThaLTS\nJB2FBF6O4A1y2f2mhYtQL0VPhZf4GNCwu/WgbHbkDBLTui1mvC832qaAIq8cqSQq\n3yW5J2A0si+iDs9PTTRXIC+Pw0QjCugtgr/65OohhedD06SlA5yd8gxME9zbTNZ4\n9qOUKlrrvWm56AS/TZc/Fks53wKBgQDffFKuZwpiPw6ent+dy05HKQajwb9DVB0n\nN4zSy/xYo2PhkZKBs/SmN1UJasrpALsL00MnbjGgeyg1k5H1x19bc4k4UP/4bT+y\noXaGTfcUcf0HH4Lp5+DKZcILTHJ3Fbz18P3GtxFPmxK1lAr9UQkIm6ZvJT93Ljx7\nuXncnwRKZwKBgBXp0zEdH65n3SNLxdyEseqQOdvKKSaiEoEWsUEfzqzvyaT4cHnJ\neUa/NYYrdDAIF2bkY84X8o+4VN794M7c02jgZDXjdGtq/Xape8RGHsD2fhTbfUju\ncG9Ps2OiILRu4L1PtCNzSSasDr/ZLWXZ4ricyBYlilEoVEaOhYwjVyqLAoGAU033\nT/UuxLJ2k5/rANmgwxvC0tXMop8/ArhNMOJCnRPCjnmB4AEhZ7fmZc09956DGoRU\nWuVTcFuYAGiSlsgLfn5RnwFqeMLYZJCVKrjzKdbXl4kidmgtvaQysZ18aXFb7102\na5UfycmnLrIRap2DPYcvgeyjfJxqhT/88cUAh28CgYBNzWAc+sZitiRFGS9ky8Pp\nWSGJWN6T2BKo1SNDqN9OGHU4ImERLVWrpWacJ1fmDjwhhLsXv/AA4ezTPWPpHZCu\nMZ8ACi1NS6+Lnlqtc5CZ0ufcBlmK6yz0FWrYJTHd42qzJgTEUyaVVMvreWUKwaO7\nhoSY4wQCLXAOSFBe+34jWQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-e9m9f@weatherminer.iam.gserviceaccount.com",
+  "client_id": "103125372637328689850",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-e9m9f%40weatherminer.iam.gserviceaccount.com"
+}
