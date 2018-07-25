@@ -9,14 +9,14 @@ function getDate(){
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://weatherminer.firebaseio.com"
+  databaseURL: "https://wtadashboard-e3345.firebaseio.com/"
 });
 var db = admin.database();
 
 
 const darkSkyKey = "37b8356444fc0bfc5d7cc6c1b1f9958c";
 const weatherUndergroundKey = "85590f6b6fc6bcd1";
-const TimeString = '*/30 * * * *';
+const TimeString = '* */6 * * *';
 
 var Coordinates = [];
 
@@ -26,7 +26,7 @@ function darkSkyJob() {
     let reqest = `https://api.darksky.net/forecast/${darkSkyKey}/${c.latitude},${c.longitude}`
     axios.get(reqest).then( response => {
       if(response.status == 200){
-          FBCityKey = db.ref(`DarkSky/${c.id}/${response.data.currently.time}`);
+          FBCityKey = db.ref(`DarkSky/${c.id}/${Date.now()}`);
           FBCityKey.set(response.data, error => {
             if(error)
               console.log("\x1b[31m", `[✕] ${getDate()}: DarkSky: ${c.id} Status: ${error}`);
@@ -42,14 +42,13 @@ function darkSkyJob() {
   })
 }
 
-
 function weatherUndergroundJob() {
-  console.log("\x1b[37m", `${getDate()}: WeatherUnderground job Started`);
+  console.log("\x1b[37m", `${getDate()}: WeatherUnderground Job Started`);
   Coordinates.forEach( c => {
     let reqest = `https://api-ak-aws.wunderground.com/api/85590f6b6fc6bcd1/forecast10day/hourly10day/conditions/alerts/lang:EN/units:metric/v:2.0${c.zmw}.json`
     axios.get(reqest).then( response => {
       if(response.status == 200){
-          FBCityKey = db.ref(`WeatherUnderground/${c.id}/${response.data.current_observation.date.epoch}`);
+          FBCityKey = db.ref(`WeatherUnderground/${c.id}/${Date.now()}`);
           FBCityKey.set(response.data, error => {
             if (error)
               console.log("\x1b[31m", `[✕] ${getDate()}: FCM WeatherUnderground: ${c.id} Status: ${error}`);
@@ -65,6 +64,28 @@ function weatherUndergroundJob() {
   })
 }
 
+function weatherUndergroundLegacyJob() {
+  console.log("\x1b[37m", `${getDate()}: WeatherUndergroundLegacy Job Started`);
+  Coordinates.forEach( c => {
+    let reqest = `http://api.wunderground.com/api/${weatherUndergroundKey}/conditions/forecast10day/q/${c.latitude},${c.longitude}.json`
+    axios.get(reqest).then( response => {
+      if(response.status == 200){
+          FBCityKey = db.ref(`WeatherUndergroundLegacy/${c.id}/${Date.now()}`);
+          FBCityKey.set(response.data, error => {
+            if (error)
+              console.log("\x1b[31m", `[✕] ${getDate()}: FCM WeatherUndergroundLegacy: ${c.id} Status: ${error}`);
+            else
+              console.log("\x1b[32m", `[✓] ${getDate()}: WeatherUndergroundLegacy: ${c.id} Status: ${response.status}`);
+          })
+        } else {
+          console.log("\x1b[31m", `[✕] ${getDate()}: WeatherUndergroundLegacy: ${c.id} Status: ${response.status}`);
+        }
+      }).catch( error => {
+        console.error("\x1b[31m", `[✕] ${getDate()}: Unable to reach WeatherUndergroundLegacy, ${c.id} request ${error}`);
+      })
+  })
+}
+
 db.ref('/Stations').once('value', snapshot => {
   console.log("Server Started");
   let data = snapshot.val();
@@ -74,6 +95,7 @@ db.ref('/Stations').once('value', snapshot => {
   }
   WeatherUnderground = new CronJob(TimeString, weatherUndergroundJob, null , true, null, null, this, true);
   DarkSky = new CronJob(TimeString, darkSkyJob, null , true, null, null, this, true);
+  WeatherUndergroundLegacy = new CronJob(TimeString, weatherUndergroundLegacyJob, null , true, null, null, this, true);
 })
 
 
