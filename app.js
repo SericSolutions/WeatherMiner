@@ -16,7 +16,7 @@ var db = admin.database();
 
 const darkSkyKey = "37b8356444fc0bfc5d7cc6c1b1f9958c";
 const weatherUndergroundKey = "85590f6b6fc6bcd1";
-const TimeString = '* */6 * * *';
+const TimeString = '0 */6 * * *';
 
 var Coordinates = [];
 
