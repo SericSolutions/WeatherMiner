@@ -16,6 +16,9 @@ var db = admin.database();
 
 const darkSkyKey = "37b8356444fc0bfc5d7cc6c1b1f9958c";
 const weatherUndergroundKey = "85590f6b6fc6bcd1";
+const accuWeatherKeys = ["AFNJzQOo0rVoKjEDGUhhMo3RftTxQWvy",
+  "9lvAxpcHyqI5uadIKUmsUwbh7sBpRVVw", 
+  "Mda7nDkkFpi8wj8uQwQVmkZtqGGYSpfJ"]
 const TimeString = '0 */6 * * *';
 
 var Coordinates = [];
@@ -86,6 +89,30 @@ function weatherUndergroundLegacyJob() {
   })
 }
 
+function AccuWeatherJob() {
+  console.log("\x1b[37m", `${getDate()}: AccuWeather Job Started`);
+  Coordinates.forEach( (c, i) => {
+    let reqest = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' +
+      `${c.awk}?apikey=${accuWeatherKeys[i%3]}&details=true&metric=true`
+    console.log(i%3, reqest);
+    axios.get(reqest).then( response => {
+      if(response.status == 200){
+          FBCityKey = db.ref(`AccuWeather/${c.id}/${Date.now()}`);
+          FBCityKey.set(response.data, error => {
+            if (error)
+              console.log("\x1b[31m", `[✕] ${getDate()}: FCM AccuWeather: ${c.id} Status: ${error}`);
+            else
+              console.log("\x1b[32m", `[✓] ${getDate()}: AccuWeather: ${c.id} Status: ${response.status}`);
+          })
+        } else {
+          console.log("\x1b[31m", `[✕] ${getDate()}: AccuWeather: ${c.id} Status: ${response.status}`);
+        }
+      }).catch( error => {
+        console.error("\x1b[31m", `[✕] ${getDate()}: Unable to reach AccuWeather, ${c.id} request ${error}`);
+      })
+  })
+}
+
 db.ref('/Stations').once('value', snapshot => {
   console.log("Server Started");
   let data = snapshot.val();
@@ -96,6 +123,7 @@ db.ref('/Stations').once('value', snapshot => {
   WeatherUnderground = new CronJob(TimeString, weatherUndergroundJob, null , true, null, null, this, true);
   DarkSky = new CronJob(TimeString, darkSkyJob, null , true, null, null, this, true);
   WeatherUndergroundLegacy = new CronJob(TimeString, weatherUndergroundLegacyJob, null , true, null, null, this, true);
+  AccuWeather = new CronJob(TimeString, AccuWeatherJob, null , true, null, null, this, true);
 })
 
 
